@@ -3,20 +3,19 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Task from './Task';
 import { fetchTasks } from '../store/actions';
-import taskData from '../assets/mockData.json';
 
-const TaskList = (props) => {
+const TaskList = () => {
     const dispatch = useDispatch();
     const { tasks, isLoading, isError, errorMsg } = useSelector(
         state => state
     );
 
     useEffect(() => {
-        dispatch(fetchTasks(taskData));
+        dispatch(fetchTasks());
     }, []);
 
     return (
-        <div>
+        <div className="task">
             {isLoading && <div>Data loading...</div>}
             {isError && <div>Error loading data: {errorMsg}</div>}
             {!isLoading && !isError && (
