@@ -1,8 +1,12 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 
-import { Card } from '@mui/material';
+import { deleteTask } from '../store/actions';
+
+import { Button, Card } from '@mui/material';
 
 const Task = (props) => {
+    const dispatch = useDispatch();
     const { id, taskName, dueDate, done, assignedTo, status, comments } = props.task
 
     return (
@@ -16,6 +20,7 @@ const Task = (props) => {
                 <p>Assigned to: {assignedTo}</p>
                 <p>Status: {status}</p>
                 <p>Comments: {comments}</p>
+                <Button style={{marginLeft: "4%"}} onClick={() => dispatch(deleteTask(id))}>Delete</Button>
             </Card>
         </div>
     )

@@ -1,4 +1,4 @@
-import { REQUEST_TASK_DATA, RECEIVE_TASK_DATA } from '../actions';
+import { DELETE_TASK, REQUEST_TASK_DATA, RECEIVE_TASK_DATA } from '../actions';
 
 export const initialState = {
     tasks: [],
@@ -24,6 +24,14 @@ export const initialState = {
                 isLoading: false,
                 isError: action.isError,
                 errorMsg: action.errorMsg,
+            };
+            
+        case DELETE_TASK:
+            const newList = state.tasks.filter((data)=> data.id !== action.id)
+
+            return {
+                ...state,
+                tasks: newList,
             };
 
         default:
