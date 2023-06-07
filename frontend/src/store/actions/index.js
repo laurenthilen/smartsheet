@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+export const ADD_TASK = "ADD_TASK";
 export const DELETE_TASK = "DELETE_TASK";
 export const REQUEST_TASK_DATA = "REQUEST_TASK_DATA";
 export const RECEIVE_TASK_DATA = "RECEIVE_TASK_DATA";
@@ -38,4 +39,12 @@ export const deleteTask = (id) => async dispatch => {
         .then(dispatch({type: DELETE_TASK, id: id}))
         .then(fetchTasks())
         .catch((err) => console.log(err));
+};
+
+export const addTask = (newTask) => async dispatch => {
+    axios
+       .post("/api/todos/", newTask, { headers: { 'X-CSRFToken': csrftoken } })
+       .then((res) => dispatch({type: ADD_TASK, newTask: newTask}))
+       .then(fetchTasks())
+       .catch((err) => console.log(err));
 };
