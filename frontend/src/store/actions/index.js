@@ -4,6 +4,7 @@ export const ADD_TASK = "ADD_TASK";
 export const DELETE_TASK = "DELETE_TASK";
 export const REQUEST_TASK_DATA = "REQUEST_TASK_DATA";
 export const RECEIVE_TASK_DATA = "RECEIVE_TASK_DATA";
+export const UPDATE_TASK = "UPDATE_TASK";
 
 function getCookie(name) {
     var cookieValue = null;
@@ -47,4 +48,12 @@ export const addTask = (newTask) => async dispatch => {
        .then((res) => dispatch({type: ADD_TASK, newTask: newTask}))
        .then(fetchTasks())
        .catch((err) => console.log(err));
+};
+
+export const updateTask = (task, update) => async dispatch => {
+    axios
+        .put(`/api/todos/${task.id}`, { headers: { 'X-CSRFToken': csrftoken } })
+        .then(dispatch({type: UPDATE_TASK, task: task, update: update}))
+        .then(fetchTasks())
+        .catch((err) => console.log(err));
 };

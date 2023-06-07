@@ -3,6 +3,7 @@ import {
     DELETE_TASK, 
     REQUEST_TASK_DATA, 
     RECEIVE_TASK_DATA,
+    UPDATE_TASK,
 } from '../actions';
 import { v4 as uuid } from 'uuid';
 
@@ -57,7 +58,22 @@ export const initialState = {
                 ...state,
                 tasks: state.tasks.concat(newTask),
             };
-            
+
+        case UPDATE_TASK:
+            let updateList = [...state.tasks]
+            const idx = updateList.indexOf(action.task)
+            if (idx !== -1) {
+                updateList[idx].comments = action.update
+                return {
+                    ...state,
+                    tasks: updateList,
+                }
+            } else {
+                return {
+                    ...state
+                }
+            };
+
         default:
             return state;
         }
