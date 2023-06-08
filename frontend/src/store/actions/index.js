@@ -29,8 +29,8 @@ export const fetchTasks = () => async dispatch => {
     });
 
     axios
-        .get("/api/todos/")
-        .then((res) => dispatch({type: RECEIVE_TASK_DATA, tasks: res.data}))
+        .get("http://127.0.0.1:8000/")
+        .then((res) => dispatch({type: RECEIVE_TASK_DATA, tasks: res.data.rows}))
         .catch((err) => console.log(err));
 };
 

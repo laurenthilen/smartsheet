@@ -8,10 +8,17 @@ import { Button, Card, Checkbox, IconButton, TextField } from '@mui/material';
 
 const Task = (props) => {
     const dispatch = useDispatch();
-    const { id, taskName, dueDate, done, assignedTo, status, comments } = props.task
+    const task = {
+        taskName: props.task[0].value,
+        dueDate: props.task[1].value,
+        done: false,
+        assignedTo: props.task[3].value,
+        status: props.task[4].value,
+        comments: props.task[5].value,
+    }
     const [edit, setEdit] = useState(false);
     const [checked, setChecked] = useState(false);
-    const [updateComments, setUpdateComments] = useState(comments);
+    const [updateComments, setUpdateComments] = useState(task.comments);
 
     // TODO chain these - useMemo
     const handleCheck = (e) => {
@@ -27,20 +34,20 @@ const Task = (props) => {
     }
 
     return (
-        <div key={id} className="task">
-            <Card key={id} className="task-container" style={{backgroundColor: "#F5F5F5"}}>
+        <div key={props.id} className="task">
+            <Card key={props.id} className="task-container" style={{backgroundColor: "#F5F5F5"}}>
                 <div className="task-header">
-                    <h2>{taskName}</h2>
+                    <h2>{task.taskName}</h2>
                     <Checkbox
                         checked={checked}
                         onChange={handleCheck}
                     />
                 </div>
-                <p>Due date: {dueDate}</p>
-                <p>Assigned to: {assignedTo}</p>
-                <p>Status: {status}</p>
+                <p>Due date: {task.dueDate}</p>
+                <p>Assigned to: {task.assignedTo}</p>
+                <p>Status: {task.status}</p>
                 <div className="edit-comments">
-                    <p>Comments: {comments}</p>
+                    <p>Comments: {task.comments}</p>
                     <div className="edit-icon">
                         <IconButton edge="end" aria-label="edit" onClick={() => setEdit(!edit)}>
                             { edit ? <Clear /> : <Edit /> }
@@ -57,7 +64,7 @@ const Task = (props) => {
                         <div />
                     )}
                 </div>
-                <Button style={{marginLeft: "4%"}} onClick={() => dispatch(deleteTask(id))}>Delete</Button>
+                <Button style={{marginLeft: "4%"}} onClick={() => dispatch(deleteTask(props.id))}>Delete</Button>
             </Card>
         </div>
     )

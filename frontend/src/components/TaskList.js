@@ -20,7 +20,7 @@ const TaskList = () => {
             {isError && <div>Error loading data: {errorMsg}</div>}
             {!isLoading && !isError && (
                 tasks.map(task => (
-                    <Task key={task.id} task={task} />
+                    <Task key={task.id} task={task.cells} id={task.id}/>
                 ))
             )}
         </div>
