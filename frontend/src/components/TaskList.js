@@ -12,6 +12,7 @@ const TaskList = () => {
 
     useEffect(() => {
         dispatch(fetchTasks());
+        console.log(tasks)
     }, []);
 
     return (

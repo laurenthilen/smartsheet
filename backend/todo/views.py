@@ -1,8 +1,6 @@
 from django.conf import settings
 from django.http import HttpResponse
 import requests
-from .models import Todo
-from .serializers import TodoSerializer
 
 
 def home(request):
